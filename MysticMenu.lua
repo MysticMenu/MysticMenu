@@ -1,5 +1,9 @@
 -- Mystic Menu GUI by DESCONHECIDO 🔮
+repeat wait() until game:IsLoaded()
 local player = game.Players.LocalPlayer
+if not player then repeat wait() until game.Players.LocalPlayer end
+player = game.Players.LocalPlayer
+
 local uis = game:GetService("UserInputService")
 
 -- Credenciais
