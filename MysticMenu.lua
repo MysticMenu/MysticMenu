@@ -29,18 +29,11 @@ loginFrame.Active = true
 loginFrame.Draggable = true
 round(loginFrame)
 
--- Logo
-local logo = Instance.new("ImageLabel", loginFrame)
-logo.Size = UDim2.new(0, 80, 0, 80)
-logo.Position = UDim2.new(0.5, -40, 0, 10)
-logo.BackgroundTransparency = 1
-logo.Image = "rbxassetid://100552916774977"
-
--- Título
+-- Título estilizado
 local title = Instance.new("TextLabel", loginFrame)
-title.Size = UDim2.new(1, 0, 0, 40)
-title.Position = UDim2.new(0, 0, 0, 90)
-title.Text = "Mystic Menu"
+title.Size = UDim2.new(1, 0, 0, 60)
+title.Position = UDim2.new(0, 0, 0, 20)
+title.Text = "Mystic"
 title.TextColor3 = Color3.new(1, 1, 1)
 title.BackgroundTransparency = 1
 title.Font = Enum.Font.GothamBold
@@ -48,7 +41,7 @@ title.TextScaled = true
 
 -- Campos de login
 local nameBox = Instance.new("TextBox", loginFrame)
-nameBox.Position = UDim2.new(0.5, -150, 0, 140)
+nameBox.Position = UDim2.new(0.5, -150, 0, 100)
 nameBox.Size = UDim2.new(0, 300, 0, 30)
 nameBox.PlaceholderText = "Usuário"
 nameBox.Text = ""
@@ -59,7 +52,7 @@ nameBox.TextScaled = true
 round(nameBox)
 
 local passBox = Instance.new("TextBox", loginFrame)
-passBox.Position = UDim2.new(0.5, -150, 0, 180)
+passBox.Position = UDim2.new(0.5, -150, 0, 140)
 passBox.Size = UDim2.new(0, 300, 0, 30)
 passBox.PlaceholderText = "Senha"
 passBox.Text = ""
@@ -70,7 +63,7 @@ passBox.TextScaled = true
 round(passBox)
 
 local confirmBtn = Instance.new("TextButton", loginFrame)
-confirmBtn.Position = UDim2.new(0.5, -75, 0, 230)
+confirmBtn.Position = UDim2.new(0.5, -75, 0, 190)
 confirmBtn.Size = UDim2.new(0, 150, 0, 30)
 confirmBtn.Text = "LOGIN"
 confirmBtn.TextColor3 = Color3.new(1, 1, 1)
@@ -89,29 +82,35 @@ mainPanel.Active = true
 mainPanel.Draggable = true
 round(mainPanel)
 
--- Logo no topo
-local menuLogo = Instance.new("ImageLabel", mainPanel)
-menuLogo.Size = UDim2.new(0, 60, 0, 60)
-menuLogo.Position = UDim2.new(0.5, -30, 0, 10)
-menuLogo.BackgroundTransparency = 1
-menuLogo.Image = "rbxassetid://100552916774977"
+-- Título no topo
+local menuTitle = Instance.new("TextLabel", mainPanel)
+menuTitle.Size = UDim2.new(1, 0, 0, 40)
+menuTitle.Position = UDim2.new(0, 0, 0, 10)
+menuTitle.Text = "Mystic"
+menuTitle.TextColor3 = Color3.new(1, 1, 1)
+menuTitle.BackgroundTransparency = 1
+menuTitle.Font = Enum.Font.GothamBold
+menuTitle.TextScaled = true
 
--- Abas
+-- Abas com emojis
 local tabs = {
-    {name = "Combat", image = "rbxassetid://77706911523028"},
-    {name = "Visuals", image = "rbxassetid://84515563786739"},
-    {name = "Veículos", image = "rbxassetid://86821982427670"},
-    {name = "Player", image = "rbxassetid://84515563786739"}
+    {name = "Combat", emoji = "🎯"},
+    {name = "Visuals", emoji = "👁️"},
+    {name = "Veículos", emoji = "🚗"},
+    {name = "Player", emoji = "🧍"}
 }
 
 local tabFrames = {}
 
 for i, tabData in ipairs(tabs) do
-    local btn = Instance.new("ImageButton", mainPanel)
+    local btn = Instance.new("TextButton", mainPanel)
     btn.Size = UDim2.new(0, 50, 0, 50)
-    btn.Position = UDim2.new(0, 10, 0, 80 + (i - 1) * 60)
-    btn.Image = tabData.image
+    btn.Position = UDim2.new(0, 10, 0, 60 + (i - 1) * 60)
+    btn.Text = tabData.emoji
+    btn.TextColor3 = Color3.new(1, 1, 1)
     btn.BackgroundColor3 = Color3.fromRGB(255, 0, 0)
+    btn.Font = Enum.Font.GothamBold
+    btn.TextScaled = true
     round(btn)
 
     local tab = Instance.new("Frame", mainPanel)
@@ -127,7 +126,6 @@ for i, tabData in ipairs(tabs) do
         tab.Visible = true
     end)
 
-    -- Nome da aba
     local label = Instance.new("TextLabel", tab)
     label.Size = UDim2.new(1, 0, 0, 40)
     label.Position = UDim2.new(0, 0, 0, 0)
