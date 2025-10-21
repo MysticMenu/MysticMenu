@@ -1,9 +1,6 @@
 -- Mystic Menu GUI by DESCONHECIDO 🔮
 repeat wait() until game:IsLoaded()
 local player = game.Players.LocalPlayer
-if not player then repeat wait() until game.Players.LocalPlayer end
-player = game.Players.LocalPlayer
-
 local uis = game:GetService("UserInputService")
 
 -- Credenciais
@@ -15,22 +12,29 @@ local gui = Instance.new("ScreenGui", player:WaitForChild("PlayerGui"))
 gui.Name = "MysticMenu"
 gui.ResetOnSpawn = false
 
+-- Estilo padrão
+local function round(obj)
+    local corner = Instance.new("UICorner")
+    corner.CornerRadius = UDim.new(0, 8)
+    corner.Parent = obj
+end
+
 -- Login Frame
 local loginFrame = Instance.new("Frame", gui)
 loginFrame.Size = UDim2.new(0, 420, 0, 320)
 loginFrame.Position = UDim2.new(0.5, -210, 0.5, -160)
-loginFrame.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
-loginFrame.BorderColor3 = Color3.fromRGB(255, 0, 0)
-loginFrame.BorderSizePixel = 2
+loginFrame.BackgroundColor3 = Color3.fromRGB(20, 0, 0)
+loginFrame.BorderSizePixel = 0
 loginFrame.Active = true
 loginFrame.Draggable = true
+round(loginFrame)
 
--- Logo do mago
+-- Logo
 local logo = Instance.new("ImageLabel", loginFrame)
 logo.Size = UDim2.new(0, 80, 0, 80)
 logo.Position = UDim2.new(0.5, -40, 0, 10)
 logo.BackgroundTransparency = 1
-logo.Image = "rbxassetid://COLOCA_ID_DO_MAGO_AQUI"
+logo.Image = "rbxassetid://100552916774977"
 
 -- Título
 local title = Instance.new("TextLabel", loginFrame)
@@ -42,28 +46,20 @@ title.BackgroundTransparency = 1
 title.Font = Enum.Font.GothamBold
 title.TextScaled = true
 
--- Campo de login
-local nameLabel = Instance.new("TextLabel", loginFrame)
-nameLabel.Position = UDim2.new(0.5, -100, 0, 140)
-nameLabel.Size = UDim2.new(0, 200, 0, 30)
-nameLabel.Text = "Seu login"
-nameLabel.TextColor3 = Color3.new(1, 1, 1)
-nameLabel.BackgroundTransparency = 1
-nameLabel.Font = Enum.Font.Gotham
-nameLabel.TextScaled = true
-
+-- Campos de login
 local nameBox = Instance.new("TextBox", loginFrame)
-nameBox.Position = UDim2.new(0.5, -150, 0, 180)
+nameBox.Position = UDim2.new(0.5, -150, 0, 140)
 nameBox.Size = UDim2.new(0, 300, 0, 30)
-nameBox.PlaceholderText = "MysticRoblox_loguin"
+nameBox.PlaceholderText = "Usuário"
 nameBox.Text = ""
 nameBox.TextColor3 = Color3.new(1, 1, 1)
 nameBox.BackgroundColor3 = Color3.fromRGB(60, 0, 0)
 nameBox.Font = Enum.Font.Gotham
 nameBox.TextScaled = true
+round(nameBox)
 
 local passBox = Instance.new("TextBox", loginFrame)
-passBox.Position = UDim2.new(0.5, -150, 0, 220)
+passBox.Position = UDim2.new(0.5, -150, 0, 180)
 passBox.Size = UDim2.new(0, 300, 0, 30)
 passBox.PlaceholderText = "Senha"
 passBox.Text = ""
@@ -71,61 +67,75 @@ passBox.TextColor3 = Color3.new(1, 1, 1)
 passBox.BackgroundColor3 = Color3.fromRGB(60, 0, 0)
 passBox.Font = Enum.Font.Gotham
 passBox.TextScaled = true
+round(passBox)
 
 local confirmBtn = Instance.new("TextButton", loginFrame)
-confirmBtn.Position = UDim2.new(0.5, -75, 0, 260)
+confirmBtn.Position = UDim2.new(0.5, -75, 0, 230)
 confirmBtn.Size = UDim2.new(0, 150, 0, 30)
-confirmBtn.Text = "Entrar"
+confirmBtn.Text = "LOGIN"
 confirmBtn.TextColor3 = Color3.new(1, 1, 1)
 confirmBtn.BackgroundColor3 = Color3.fromRGB(255, 0, 0)
 confirmBtn.Font = Enum.Font.GothamBold
 confirmBtn.TextScaled = true
-
-local version = Instance.new("TextLabel", loginFrame)
-version.Position = UDim2.new(0, 10, 1, -20)
-version.Size = UDim2.new(0, 200, 0, 20)
-version.Text = "Versão: roblox"
-version.TextColor3 = Color3.new(1, 1, 1)
-version.BackgroundTransparency = 1
-version.Font = Enum.Font.Gotham
-version.TextScaled = true
+round(confirmBtn)
 
 -- Painel principal
 local mainPanel = Instance.new("Frame", gui)
-mainPanel.Size = UDim2.new(0, 500, 0, 400)
-mainPanel.Position = UDim2.new(0.5, -250, 0.5, -200)
-mainPanel.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
-mainPanel.BorderColor3 = Color3.fromRGB(255, 0, 0)
-mainPanel.BorderSizePixel = 2
+mainPanel.Size = UDim2.new(0, 600, 0, 400)
+mainPanel.Position = UDim2.new(0.5, -300, 0.5, -200)
+mainPanel.BackgroundColor3 = Color3.fromRGB(20, 0, 0)
 mainPanel.Visible = false
 mainPanel.Active = true
 mainPanel.Draggable = true
+round(mainPanel)
+
+-- Logo no topo
+local menuLogo = Instance.new("ImageLabel", mainPanel)
+menuLogo.Size = UDim2.new(0, 60, 0, 60)
+menuLogo.Position = UDim2.new(0.5, -30, 0, 10)
+menuLogo.BackgroundTransparency = 1
+menuLogo.Image = "rbxassetid://100552916774977"
 
 -- Abas
-local tabs = {"Combat", "Visuals", "Veículos"}
+local tabs = {
+    {name = "Combat", image = "rbxassetid://77706911523028"},
+    {name = "Visuals", image = "rbxassetid://84515563786739"},
+    {name = "Veículos", image = "rbxassetid://86821982427670"},
+    {name = "Player", image = "rbxassetid://84515563786739"}
+}
+
 local tabFrames = {}
 
-for i, name in ipairs(tabs) do
-    local btn = Instance.new("TextButton", mainPanel)
-    btn.Size = UDim2.new(0, 120, 0, 30)
-    btn.Position = UDim2.new(0, 10 + (i - 1) * 130, 0, 10)
-    btn.Text = name
+for i, tabData in ipairs(tabs) do
+    local btn = Instance.new("ImageButton", mainPanel)
+    btn.Size = UDim2.new(0, 50, 0, 50)
+    btn.Position = UDim2.new(0, 10, 0, 80 + (i - 1) * 60)
+    btn.Image = tabData.image
     btn.BackgroundColor3 = Color3.fromRGB(255, 0, 0)
-    btn.TextColor3 = Color3.new(1, 1, 1)
-    btn.Font = Enum.Font.GothamBold
-    btn.TextScaled = true
+    round(btn)
 
     local tab = Instance.new("Frame", mainPanel)
-    tab.Size = UDim2.new(0, 480, 0, 340)
-    tab.Position = UDim2.new(0, 10, 0, 50)
-    tab.BackgroundColor3 = Color3.fromRGB(20, 0, 0)
+    tab.Size = UDim2.new(0, 520, 0, 300)
+    tab.Position = UDim2.new(0, 70, 0, 80)
+    tab.BackgroundColor3 = Color3.fromRGB(30, 0, 0)
     tab.Visible = false
-    tabFrames[name] = tab
+    round(tab)
+    tabFrames[tabData.name] = tab
 
     btn.MouseButton1Click:Connect(function()
         for _, t in pairs(tabFrames) do t.Visible = false end
         tab.Visible = true
     end)
+
+    -- Nome da aba
+    local label = Instance.new("TextLabel", tab)
+    label.Size = UDim2.new(1, 0, 0, 40)
+    label.Position = UDim2.new(0, 0, 0, 0)
+    label.Text = tabData.name
+    label.TextColor3 = Color3.new(1, 1, 1)
+    label.BackgroundTransparency = 1
+    label.Font = Enum.Font.GothamBold
+    label.TextScaled = true
 end
 
 -- Login funcional
@@ -136,7 +146,7 @@ confirmBtn.MouseButton1Click:Connect(function()
     else
         confirmBtn.Text = "❌ Erro"
         wait(1)
-        confirmBtn.Text = "Entrar"
+        confirmBtn.Text = "LOGIN"
     end
 end)
 
