@@ -144,7 +144,6 @@ uis.InputBegan:Connect(function(input, gpe)
     end
 end)
 
--- Funções internas por aba
 local function createButton(tab, name, yPos, callback)
     local btn = Instance.new("TextButton", tab)
     btn.Size = UDim2.new(0, 200, 0, 30)
